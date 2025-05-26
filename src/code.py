@@ -11,7 +11,6 @@ def top_sellers():
     array = read_data()['make'].value_counts()
     best_sell_brands = array.head(10)
 
-    # Setting bars configs
     # creating plots
     fig, ax = plt.subplots()
     ax.set_title('Top 10 Best Sales Brands')
