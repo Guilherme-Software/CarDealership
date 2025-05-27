@@ -18,7 +18,24 @@ def top_sellers():
 
     ax.bar(best_sell_brands.index, best_sell_brands.values)
 
-    plt.show()
+
+# top 10 most saled cars models.
+def top_models():
+    array = read_data()["model"].value_counts()
+    best_sell_models = array.head(10)
+
+    # config of plots:
+    fig, ax = plt.subplots()
+    ax.set_title("Top 10 Most Saled Models")
+    ax.set_ylabel("Sales")
+
+    ax.bar(best_sell_models.index, best_sell_models.values)
+
+# sales per month:
+def months():
+    read_data()["saledate"] = pd.to_datetime(read_data()["saledate"], errors='coerce', utc=True)
+    read_data()["saledate"].head(10)
+
 
 
 
