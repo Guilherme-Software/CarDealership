@@ -6,9 +6,11 @@ import matplotlib.pyplot as plt
 def read_data():
     return pd.read_csv("car_prices.csv")
 
+df = read_data()
+
 # selecting 10 best sell brands
 def top_sellers():
-    array = read_data()['make'].value_counts()
+    array = df['make'].value_counts()
     best_sell_brands = array.head(10)
 
     # creating plots
@@ -21,7 +23,7 @@ def top_sellers():
 
 # top 10 most saled cars models.
 def top_models():
-    array = read_data()["model"].value_counts()
+    array = df["model"].value_counts()
     best_sell_models = array.head(10)
 
     # config of plots:
@@ -31,11 +33,23 @@ def top_models():
 
     ax.bar(best_sell_models.index, best_sell_models.values)
 
-# sales per month:
-def months():
-    read_data()["saledate"] = pd.to_datetime(read_data()["saledate"], errors='coerce', utc=True)
-    read_data()["saledate"].head(10)
+# sales per year:
+def monthly_sales_2014():
+    df["saledate"] = pd.to_datetime(df["saledate"], errors='coerce', utc=True)
+    df["year"] = df["saledate"].dt.year
+    df["month"] = df["saledate"].dt.to_period("M")
 
+    selected_year = 2014
+    df_selected_year = df[df["year"] == selected_year]
+
+    monthly_sales = df_selected_year.groupby("month")["sellingprice"].sum()
+
+    # config of plots:
+    fig, ax = plt.subplots()
+    ax.set_title("Monthly Sales 2014")
+    ax.set_ylabel("Sales")
+
+    ax.bar(monthly_sales.index, monthly_sales.values)
 
 
 
