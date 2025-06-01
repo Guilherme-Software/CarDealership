@@ -7,6 +7,7 @@ def read_data():
     return pd.read_csv("car_prices.csv")
 
 df = read_data()
+df = df.dropna()
 
 # selecting 10 best sell brands
 def top_sellers():
@@ -65,3 +66,30 @@ def quarterly_sales(selected_year, trimester):
     ax.set_xlabel("MONTHS")
     ax.set_ylabel("SALES")
 
+def color_sales():
+    # select most sold colors and filter car withoout colors name.
+    filtered_colors = df["color"].dropna()
+    filtered_colors = filtered_colors[filtered_colors != "—"]
+    colors = filtered_colors.value_counts().head(10)
+
+    # config of plots.
+    fig, ax = plt.subplots(figsize = (8, 6))
+
+    ax.set_title("Most Sold Car Per Colors")
+
+    # plot pie and put the colors in the grafic.
+    colors.plot(kind="pie", ax=ax, colors=[
+        'black', 
+        "#ECECEC", 
+        '#C0C0C0', 
+        'gray', 
+        'blue', 
+        'red', 
+        '#FFD700', 
+        'green', 
+        '#800020', 
+        '#F5F5DC', 
+        ], autopct = '%1.1f%%', 
+        textprops={'color':"#473D3D"})
+    
+    ax.set_ylabel('')
