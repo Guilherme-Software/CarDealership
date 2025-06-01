@@ -69,7 +69,7 @@ The dataset (`car_prices.csv`) contains information about car sales, including:
 
 ### 1. Clone the repository:
 ```bash
-git clone https://github.com/Guilherme-Software/SalesDataAnalysis.git
+git clone https://github.com/Guilherme-Software/CarDealership.git
 ```
 ### 2. Install dependencies:
 ```
